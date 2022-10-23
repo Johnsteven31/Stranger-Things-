@@ -1,0 +1,51 @@
+import React, {useState, useEffect} from "react";
+
+const Register = () => {
+    const [username, setUsername] = useState () 
+    const [password, setPassword] = useState ()
+
+    async function registerHandler (event) {
+        event.preventDefault();
+        try {
+            const response = await fetch ("https://strangers-things.herokuapp.com/api/2209-ftb-mt-web-ft/users/register",
+            {
+                method: "POST", 
+                headers: {
+                        "Content-Type": "application/json"
+                },
+                bosy: JSON.stringify ({
+                    user:{
+                        username:username, 
+                        password:password
+                    }
+                })
+            })
+                            const data = await response.json ()
+                            console.log (data)
+                            localStorage.setItem("token", data.data.token)
+                            console.log(data.data.token)
+        }catch (error){
+            console.log(error)
+        }
+    }
+        const changeUsername = (event) => {
+            setUsername (event.target.value)
+        }
+        const changePassword = (event) => {
+            setPassword (event.target.value)
+        }
+        return (
+            <div>
+                < form OnSubmit = {registerHandler}>
+                    <div>Username</div>
+                    <input type ="text" value={username} onChange = {changeUsername}></input>
+                    <div>Password</div>
+                    <input type = "text" value ={password} onChange= {changePassword}></input>
+                    <div></div>
+                    <button type = "submit">Submit</button>
+                </form>
+            </div>
+        )
+}
+
+export default Register
