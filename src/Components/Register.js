@@ -11,19 +11,19 @@ const Register = () => {
             {
                 method: "POST", 
                 headers: {
-                        "Content-Type": "application/json"
+                        "Content-Type": "application/json",
                 },
-                bosy: JSON.stringify ({
+                body: JSON.stringify ({
                     user:{
                         username:username, 
                         password:password
                     }
                 })
             })
-                            const data = await response.json ()
-                            console.log (data)
-                            localStorage.setItem("token", data.data.token)
-                            console.log(data.data.token)
+            const data = await response.json ()
+                console.log (data)
+                localStorage.setItem('token', data.token)
+                console.log(data.token)
         }catch (error){
             console.log(error)
         }
@@ -36,16 +36,17 @@ const Register = () => {
         }
         return (
             <div>
-                < form OnSubmit = {registerHandler}>
-                    <div>Username</div>
+                <h3>Register</h3>
+                <form onSubmit = {registerHandler}>
+                    <label>Username</label>
                     <input type ="text" value={username} onChange = {changeUsername}></input>
-                    <div>Password</div>
+                    <label>Password</label>
                     <input type = "text" value ={password} onChange= {changePassword}></input>
                     <div></div>
                     <button type = "submit">Submit</button>
                 </form>
             </div>
-        )
+        ) 
 }
 
 export default Register
